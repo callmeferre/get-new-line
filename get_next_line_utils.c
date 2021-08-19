@@ -145,3 +145,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(substr, (str + start), len + 1);
 	return (substr);
 }
+
+char	*ft_strchr(const char *s, int	c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == c)
+		return ((char *)s);
+	return (0);
+}
