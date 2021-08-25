@@ -29,8 +29,11 @@ char	*addline(char **str, const int fd)
 
 	len = 0;
 	line = NULL;
-	if (!str[fd])
+	if (str[fd] == '\0' || str[fd][len] == '\0')
+	{
+		ft_fdlinedel(str, fd);
 		return (NULL);
+	}	
 	while (str[fd][len] != '\n' && str[fd][len] != '\0')
 		len++;
 	if (str[fd][len] == '\n')
@@ -39,7 +42,6 @@ char	*addline(char **str, const int fd)
 		tmp = ft_strdup(&(str[fd][len + 1]));
 		free(str[fd]);
 		str[fd] = tmp;
-		//line[len] = '\n';
 	}
 	else
 	{
@@ -57,17 +59,19 @@ char	*get_next_line(const int fd)
 
 	if (fd < 0 || read(fd, buff, 0) == -1)
 		return (NULL);
-	
+		
 	while (read(fd, buff, BUFFER_SIZE))
 	{	
+		buff[BUFFER_SIZE] = '\0';
 		if (!str[fd])
 			str[fd] = ft_calloc(sizeof(char), BUFFER_SIZE);
-		buff[BUFFER_SIZE] = '\0';
+
 		tmp = ft_strjoin(str[fd], buff);
 		free(str[fd]);
 		str[fd] = tmp;
 		if (ft_strchr(buff, '\n'))
 				break ;
 	}
+	printf("linea: %s\n", str[fd]);
 	return (addline(str, fd));
 }
