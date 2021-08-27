@@ -12,7 +12,6 @@
 
 #include "get_next_line.h"
 
-/* La funcion doline diferencia entre linea con salto de linea y linea final.
 /* Doline function diferenciates between line with jump and last line.
 ** If it has a jump it returns the line until said jump and if there is anything
 ** left in that has been read but not return, keeps it in th static string.
@@ -41,8 +40,8 @@ char	*doline(int len, char **str, const int fd)
 	return (line);
 }
 
-/* la funcion output revisa si se ha acabado de leer el fichero
-** en caso que sí devuelve nulo, si no averigua la longitud de la linea.
+/* Output function overlooks whether the file has ended, if
+** so returns NULL, if not it gets the length of the line read.
 */
 
 char	*output(char **str, const int fd)
@@ -61,13 +60,13 @@ char	*output(char **str, const int fd)
 	return (doline(len, str, fd));
 }
 
-/* la funcion get_next_line lee el fichero hasta el primer salto de linea.
-** Primero comprueba que exista un fichero y que este sea valido.
-** Al leer el fichero, recogemos el numero de caracteres leidos,
-** así al final de cada lectura terminamos el string buff en nulo.
-** Si no existe aun el string estático se genera. Y se le va añadiendo
-** lo que va leyendo mediante strjoin.
-** Si encuentra un salto de linea, sale del bucle.
+/* Get_next_line function reads the file until the first line jump.
+** First checks if the file exist and is valid.
+** While reading the file, it count the characters being read,
+** so with each read it can end the buff string with a NULL character.
+** If there's no static string, it creates one and fills it with
+** the content that's being read with strjoin.
+** It find a line jump, the loop ends.
 */
 
 char	*get_next_line(const int fd)
