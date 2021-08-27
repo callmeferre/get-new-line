@@ -12,9 +12,16 @@
 
 #include "get_next_line.h"
 
-char	*doline(int len, char **str, const int fd, char *line)
+/* La funcion doline diferencia entre linea con salto de linea y linea final.
+** Si tiene salto de linea devuelve del string statico hasta el salto y
+** si queda algo tras el salto de linea, esto se mantiene en el estatico.
+** Si es fin de fichero, devuelve todo lo guardado y libera el string estatico.
+*/
+
+char	*doline(int len, char **str, const int fd)
 {
 	char	*tmp;
+	char	*line;
 
 	if (str[fd][len] == '\n')
 	{
@@ -32,13 +39,15 @@ char	*doline(int len, char **str, const int fd, char *line)
 	return (line);
 }
 
-char	*addline(char **str, const int fd)
+/* la funcion output revisa si se ha acabado de leer el fichero
+** en caso que sí devuelve nulo, si no averigua la longitud de la linea.
+*/
+
+char	*output(char **str, const int fd)
 {
 	int		len;
-	char	*line;
-
+	
 	len = 0;
-	line = NULL;
 	if (str[fd] == '\0' || str[fd][len] == '\0')
 	{
 		free(str[fd]);
@@ -47,8 +56,17 @@ char	*addline(char **str, const int fd)
 	}	
 	while (str[fd][len] != '\n' && str[fd][len] != '\0')
 		len++;
-	return (doline(len, str, fd, line));
+	return (doline(len, str, fd));
 }
+
+/* la funcion get_next_line lee el fichero hasta el primer salto de linea.
+** Primero comprueba que exista un fichero y que este sea valido.
+** Al leer el fichero, recogemos el numero de caracteres leidos,
+** así al final de cada lectura terminamos el string buff en nulo.
+** Si no existe aun el string estático se genera. Y se le va añadiendo
+** lo que va leyendo mediante strjoin.
+** Si encuentra un salto de linea, sale del bucle.
+*/
 
 char	*get_next_line(const int fd)
 {
@@ -72,5 +90,5 @@ char	*get_next_line(const int fd)
 			break ;
 		chars = read(fd, buff, BUFFER_SIZE);
 	}
-	return (addline(str, fd));
+	return (output(str, fd));
 }
