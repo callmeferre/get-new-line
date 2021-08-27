@@ -10,19 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-/* La funcion doline diferencia entre linea con salto de linea y linea final.
-** Si tiene salto de linea devuelve del string statico hasta el salto y
-** si queda algo tras el salto de linea, esto se mantiene en el estatico.
-** Si es fin de fichero, devuelve todo lo guardado y libera el string estatico.
-*/
+char	*ft_strchr(const char *s, int	c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == c)
+		return ((char *)s);
+	return (0);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void			*mem;
+	size_t			i;
+	unsigned char	*temp;
+
+	mem = malloc(size * count);
+	if (!mem)
+		return (0);
+	temp = mem;
+	i = 0;
+	while (i++ < size * count)
+		*temp++ = 0;
+	return (mem);
+}
 
 char	*doline(int len, char **str, const int fd)
 {
 	char	*tmp;
 	char	*line;
 
+	line = NULL;
 	if (str[fd][len] == '\n')
 	{
 		line = ft_substr(str[fd], 0, len + 1);
@@ -39,14 +63,10 @@ char	*doline(int len, char **str, const int fd)
 	return (line);
 }
 
-/* la funcion output revisa si se ha acabado de leer el fichero
-** en caso que sí devuelve nulo, si no averigua la longitud de la linea.
-*/
-
 char	*output(char **str, const int fd)
 {
 	int		len;
-	
+
 	len = 0;
 	if (str[fd] == '\0' || str[fd][len] == '\0')
 	{
@@ -58,15 +78,6 @@ char	*output(char **str, const int fd)
 		len++;
 	return (doline(len, str, fd));
 }
-
-/* la funcion get_next_line lee el fichero hasta el primer salto de linea.
-** Primero comprueba que exista un fichero y que este sea valido.
-** Al leer el fichero, recogemos el numero de caracteres leidos,
-** así al final de cada lectura terminamos el string buff en nulo.
-** Si no existe aun el string estático se genera. Y se le va añadiendo
-** lo que va leyendo mediante strjoin.
-** Si encuentra un salto de linea, sale del bucle.
-*/
 
 char	*get_next_line(const int fd)
 {

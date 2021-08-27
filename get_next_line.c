@@ -12,10 +12,39 @@
 
 #include "get_next_line.h"
 
+char	*ft_strchr(const char *s, int	c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == c)
+		return ((char *)s);
+	return (0);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void			*mem;
+	size_t			i;
+	unsigned char	*temp;
+
+	mem = malloc(size * count);
+	if (!mem)
+		return (0);
+	temp = mem;
+	i = 0;
+	while (i++ < size * count)
+		*temp++ = 0;
+	return (mem);
+}
+
 /* La funcion doline diferencia entre linea con salto de linea y linea final.
 ** Si tiene salto de linea devuelve del string statico hasta el salto y
 ** si queda algo tras el salto de linea, esto se mantiene en el estatico.
-** Si es fin de fichero, devuelve todo lo guardado y libera el string estatico.
+** Si es fin de fichero, devuelve todo lo guardado
 */
 
 char	*doline(int len, char **str, const int fd)
@@ -23,6 +52,7 @@ char	*doline(int len, char **str, const int fd)
 	char	*tmp;
 	char	*line;
 
+	line = NULL;
 	if (str[fd][len] == '\n')
 	{
 		line = ft_substr(str[fd], 0, len + 1);
@@ -46,7 +76,7 @@ char	*doline(int len, char **str, const int fd)
 char	*output(char **str, const int fd)
 {
 	int		len;
-	
+
 	len = 0;
 	if (str[fd] == '\0' || str[fd][len] == '\0')
 	{

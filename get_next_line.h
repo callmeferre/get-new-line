@@ -30,5 +30,4 @@ char	*ft_strchr(const char *s, int	c);
 
 char	*get_next_line(const int fd);
 
-
 #endif

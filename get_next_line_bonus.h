@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acastril <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 09:35:09 by acastril          #+#    #+#             */
-/*   Updated: 2021/08/18 09:44:03 by acastril         ###   ########.fr       */
+/*   Created: 2021/08/27 10:57:06 by acastril          #+#    #+#             */
+/*   Updated: 2021/08/27 10:58:50 by acastril         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # define FILE_N 1
 
 # include <stdlib.h>
@@ -29,6 +29,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int	c);
 
 char	*get_next_line(const int fd);
-
 
 #endif

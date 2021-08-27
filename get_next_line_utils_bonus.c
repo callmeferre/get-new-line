@@ -10,29 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-void	ft_bzero(void *dest, size_t len)
-{
-	size_t			i;
-	unsigned char	*temp;
-
-	temp = dest;
-	i = 0;
-	while (i++ < len)
-		*temp++ = 0;
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*mem;
-
-	mem = malloc(size * count);
-	if (!mem)
-		return (0);
-	ft_bzero(mem, size * count);
-	return (mem);
-}
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char	*str)
 {
@@ -91,15 +69,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_endofcpy(char *dest, char *src, size_t dstsize)
-{
-	if (dstsize != 0)
-		*dest = '\0';
-	while (*src != 0)
-		src++;
-	return (src);
-}
-
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
 	char	*c;
@@ -120,8 +89,10 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 			src++;
 		}
 	}
-	if (r == 0)
-		src = ft_endofcpy(dest, (char *)src, dstsize);
+	if (dstsize != 0)
+		*dest = '\0';
+	while (*src != 0)
+		src++;
 	return (src - c);
 }
 
@@ -144,17 +115,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	ft_strlcpy(substr, (str + start), len + 1);
 	return (substr);
-}
-
-char	*ft_strchr(const char *s, int	c)
-{
-	while (*s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == c)
-		return ((char *)s);
-	return (0);
 }
