@@ -12,19 +12,6 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char	*str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != 0)
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
-
 char	*ft_strdup(const char	*str)
 {
 	char	*n_str;
@@ -67,33 +54,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i++] = s2 [j++];
 	str[i] = 0;
 	return (str);
-}
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
-{
-	char	*c;
-	size_t	r;
-
-	c = (char *)src;
-	r = dstsize;
-	if (!src)
-		return (0);
-	if (dstsize != 0)
-	{
-		while (--r != 0)
-		{
-			*dest = *src;
-			if (*dest == '\0')
-				break ;
-			dest++;
-			src++;
-		}
-	}
-	if (dstsize != 0)
-		*dest = '\0';
-	while (*src != 0)
-		src++;
-	return (src - c);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
