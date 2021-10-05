@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define FILE_N 1
+# define FILE_N 1024
 
 # include <stdlib.h>
 # include <stdio.h>
